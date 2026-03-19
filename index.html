@@ -1,10 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My School</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Life | Maranacook Community High School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h1>Welcome to Our School</h1>
-  <p>This is our website.</p>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <a href="https://mcs.maranacook.org" target="_blank">← Back to MCHS Main Site</a>
+    <span>Maranacook Community High School &nbsp;|&nbsp; Readfield, ME</span>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo-block">
+        <img src="https://cmsv2-assets.apptegy.net/uploads/3045/logo/6106/logo.png" alt="MCHS Logo" class="school-logo" />
+        <div class="logo-text">
+          <span class="logo-sup">Maranacook Community High School</span>
+          <span class="logo-title">Student Life</span>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <!-- TAB NAV -->
+  <nav class="tab-nav">
+    <div class="tab-nav-inner">
+      <a href="student-government.html" class="tab">Student Government</a>
+      <a href="honor-societies.html" class="tab">Honor Societies</a>
+      <a href="clubs.html" class="tab">Clubs</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="home-hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Get Involved</p>
+      <h1>Your School.<br>Your Community.</h1>
+      <p class="hero-sub">Discover the organizations, societies, and clubs that make Maranacook more than just a school.</p>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <!-- SECTION CARDS -->
+  <main class="home-main">
+    <div class="section-cards">
+
+      <a href="student-government.html" class="scard scard--gov">
+        <div class="scard-label">01</div>
+        <h2 class="scard-title">Student Government</h2>
+        <ul class="scard-list">
+          <li>Student Senate</li>
+          <li>Student Council</li>
+          <li>Events</li>
+        </ul>
+        <div class="scard-arrow">→</div>
+      </a>
+
+      <a href="honor-societies.html" class="scard scard--hon">
+        <div class="scard-label">02</div>
+        <h2 class="scard-title">Honor Societies</h2>
+        <ul class="scard-list">
+          <li>National Honor Society</li>
+          <li>Rho Kappa</li>
+        </ul>
+        <div class="scard-arrow">→</div>
+      </a>
+
+      <a href="clubs.html" class="scard scard--clubs">
+        <div class="scard-label">03</div>
+        <h2 class="scard-title">Clubs</h2>
+        <ul class="scard-list">
+          <li>Student-run organizations</li>
+          <li>Open to all students</li>
+        </ul>
+        <div class="scard-arrow">→</div>
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© Maranacook Community High School &nbsp;·&nbsp; 2250 Millard Harrison Drive, Readfield, ME 04355</span>
+    </div>
+  </footer>
+
 </body>
 </html>
