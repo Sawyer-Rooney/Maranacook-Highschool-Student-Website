@@ -33,6 +33,14 @@ $code-background-color: #2a2a2a;
   }
 }
 // Fix gap between banner and welcome section
+.initial-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+#main {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
 .page__content {
   padding-top: 0 !important;
   margin-top: 0 !important;
@@ -61,13 +69,4 @@ $code-background-color: #2a2a2a;
 .greedy-nav {
   background-color: #1e1e1e !important;
   width: 100%;
-}
-// Always use hamburger menu
-.greedy-nav .visible-links {
-  display: none !important;
-}
-.greedy-nav__toggle {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
 }
