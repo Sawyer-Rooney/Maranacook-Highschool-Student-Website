@@ -1,0 +1,20 @@
+---
+# Only the main.scss has front matter
+---
+
+@charset "utf-8";
+
+// Override Minimal Mistakes dark skin colors
+$background-color: #1e1e1e;
+$text-color: #f0f0f0;
+$primary-color: #f5c518;       // Gold — links, buttons, accents
+$link-color: #f5c518;
+$masthead-link-color: #f5c518;
+$masthead-link-color-hover: #ffd740;
+$navicon-link-color-hover: #ffd740;
+$footer-background-color: #141414;
+$border-color: #3a3a3a;
+$code-background-color: #2a2a2a;
+
+@import "minimal-mistakes/skins/dark";
+@import "minimal-mistakes";
