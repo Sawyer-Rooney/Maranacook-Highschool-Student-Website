@@ -17,10 +17,10 @@ $code-background-color: #2a2a2a;
 @import "minimal-mistakes";
 // Formatting for Welcome Page
 .welcome-section {
-  max-width: 800px;
-  margin: 1.5em auto !important;
+  max-width: 100%;
+  margin: 1.5em 0 !important;
   text-align: left;
-  padding: 0 1.5em;
+  padding: 0 2em;
   h2 {
     color: #f5c518;
     font-size: 2.4em;
