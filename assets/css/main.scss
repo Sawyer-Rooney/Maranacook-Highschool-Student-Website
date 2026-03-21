@@ -18,18 +18,9 @@ $code-background-color: #2a2a2a;
 @import "minimal-mistakes";
 
 .welcome-section {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
   background-color: #1e1e1e;
-
-  .page__content, .initial-content {
-    padding-top: 2em !important;  // adjust this value to move text down
-    padding-bottom: 1em !important; // optional, adjust bottom spacing
-  }
+  padding-top: 3em;      /* pushes text down */
+  padding-bottom: 2em;   /* optional, adjust space below text */
 
   h2 {
     color: #f5c518;
@@ -43,7 +34,6 @@ $code-background-color: #2a2a2a;
     font-size: 1.1em;
     line-height: 1.7;
     margin-top: 0;
-    max-width: none;  // keep the original left/right spacing
   }
 }
 
