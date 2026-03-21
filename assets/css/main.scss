@@ -18,22 +18,33 @@ $code-background-color: #2a2a2a;
 @import "minimal-mistakes";
 
 .welcome-section {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 2em 4em;
   background-color: #1e1e1e;
-  padding-top: 3em;      /* pushes text down */
-  padding-bottom: 2em;   /* optional, adjust space below text */
+
+  .page__content, .initial-content {
+    padding-top: 1 !important;    // remove extra top padding
+    padding-bottom: 0 !important; // optional: remove extra bottom padding
+  }
 
   h2 {
     color: #f5c518;
     font-size: 2.4em;
-    margin-top: 0;
-    margin-bottom: 0.5em;
+    margin-top: 0;       // remove any top margin
+    margin-bottom: 0.4em;
   }
 
   p {
     color: #f0f0f0;
     font-size: 1.1em;
     line-height: 1.7;
-    margin-top: 0;
+    margin-top: 0;       // remove top margin
+    max-width: 1100px;
   }
 }
 
