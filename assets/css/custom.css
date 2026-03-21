@@ -1,0 +1,12 @@
+.page {
+  max-width: 1400px; 
+}
+
+.page__content {
+  max-width: 100%;
+}
+
+.page__inner-wrap {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
