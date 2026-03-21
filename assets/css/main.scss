@@ -15,6 +15,7 @@ $border-color: #3a3a3a;
 $code-background-color: #2a2a2a;
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes";
+
 // Formatting for Welcome Page
 .welcome-section {
   max-width: 800px;
@@ -32,41 +33,32 @@ $code-background-color: #2a2a2a;
     line-height: 1.7;
   }
 }
-// Fix gap between banner and welcome section
-.initial-content {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-#main {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-.page__content {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-}
-.archive {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-.page__hero--overlay {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
+
 // Formatting for Toolbar
 .masthead {
   position: sticky;
   top: 0;
   z-index: 1000;
   background-color: #1e1e1e !important;
-  width: 100%;
-  left: 0;
-  right: 0;
 }
 .masthead__inner-wrap {
   background-color: #1e1e1e !important;
 }
 .greedy-nav {
   background-color: #1e1e1e !important;
-  width: 100%;
+}
+.greedy-nav .hidden-links {
+  background-color: #1e1e1e !important;
+}
+
+// Force hamburger menu by making nav think there's no space
+.greedy-nav .visible-links {
+  max-width: 1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+.greedy-nav__toggle {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
