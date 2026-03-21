@@ -1,7 +1,7 @@
 title: Maranacook High School Student Website
 description: Website to track the Maranacook High School Student Government, Honor Societies, Clubs, and Events
-url: "https://yourusername.github.io"
-baseurl: "/your-repo-name"
+url: "https://sawyer-rooney.github.io/Maranacook-Highschool-Student-Website/"
+baseurl: "/Maranacook-Highschool-Student-Website"
 remote_theme: mmistakes/minimal-mistakes
 minimal_mistakes_skin: dark
 plugins:
