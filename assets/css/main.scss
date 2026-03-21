@@ -19,6 +19,7 @@ $code-background-color: #2a2a2a;
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes";
 
+// Formatting for Welcome Page
 .welcome-section {
   max-width: 800px;
   margin: 1em auto;
@@ -38,8 +39,20 @@ $code-background-color: #2a2a2a;
   }
 }
 
+// Formatting for Toolbar
 .masthead {
   position: sticky;
   top: 0;
   z-index: 1000;
+}
+
+// Formatting for Hamburger Menu
+@media (max-width: 768px) {
+  .greedy-nav .visible-links {
+    display: none !important;
+  }
+
+  .greedy-nav__toggle {
+    display: block !important;
+  }
 }
