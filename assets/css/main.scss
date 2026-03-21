@@ -26,7 +26,7 @@ $code-background-color: #2a2a2a;
   margin-left: -50vw;
   margin-right: -50vw;
 
-  margin-top: 0.5em;     
+  margin-top: 0;     
   margin-bottom: 1.5em;
 
   padding: 2em 4em;      
@@ -65,4 +65,29 @@ $code-background-color: #2a2a2a;
 .greedy-nav {
   background-color: #1e1e1e !important;
   width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .greedy-nav .hidden-links {
+    display: none !important;
+  }
+
+  .greedy-nav .greedy-nav__toggle {
+    display: none !important;
+  }
+
+  .greedy-nav .visible-links {
+    overflow: visible !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .greedy-nav .visible-links {
+    display: none !important;
+  }
+
+  .greedy-nav .greedy-nav__toggle {
+    display: block !important;
+  }
 }
