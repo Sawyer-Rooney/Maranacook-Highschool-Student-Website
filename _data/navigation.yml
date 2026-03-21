@@ -1,0 +1,11 @@
+main:
+  - title: "Home"
+    url: /
+  - title: "Student Government"
+    url: /student-government/
+  - title: "Honor Societies"
+    url: /honor-societies/
+  - title: "Clubs"
+    url: /clubs/
+  - title: "Events"
+    url: /events/
