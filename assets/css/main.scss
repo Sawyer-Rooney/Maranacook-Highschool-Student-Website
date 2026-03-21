@@ -18,9 +18,9 @@ $code-background-color: #2a2a2a;
 // Formatting for Welcome Page
 .welcome-section {
   max-width: 800px;
-  margin: 1.5em auto !important;
+  margin: 0 auto !important;
+  padding: 1em 1.5em !important;
   text-align: left;
-  padding: 0 1.5em;
   h2 {
     color: #f5c518;
     font-size: 2.4em;
@@ -35,10 +35,15 @@ $code-background-color: #2a2a2a;
 // Fix gap between banner and welcome section
 .page__content {
   padding-top: 0 !important;
+  margin-top: 0 !important;
 }
 .archive {
   margin-top: 0 !important;
   padding-top: 0 !important;
+}
+.page__hero--overlay {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 // Formatting for Toolbar
 .masthead {
@@ -57,14 +62,12 @@ $code-background-color: #2a2a2a;
   background-color: #1e1e1e !important;
   width: 100%;
 }
-// Formatting for Hamburger Menu
-@media (max-width: 900px) {
-  .greedy-nav .visible-links {
-    display: none !important;
-  }
-  .greedy-nav__toggle {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-  }
+// Always use hamburger menu
+.greedy-nav .visible-links {
+  display: none !important;
+}
+.greedy-nav__toggle {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
