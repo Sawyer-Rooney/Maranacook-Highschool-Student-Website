@@ -1,0 +1,16 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var nav = document.querySelector('.greedy-nav');
+    var btn = document.querySelector('.greedy-nav__toggle');
+    var vlinks = document.querySelector('.greedy-nav .visible-links');
+    var hlinks = document.querySelector('.greedy-nav .hidden-links');
+
+    if (nav && btn && vlinks && hlinks) {
+      // Move all visible links into hidden (hamburger) menu
+      while (vlinks.children.length > 0) {
+        hlinks.insertBefore(vlinks.children[0], hlinks.firstChild);
+      }
+      btn.classList.remove('hidden');
+    }
+  });
+</script>
