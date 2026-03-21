@@ -32,6 +32,14 @@ $code-background-color: #2a2a2a;
     line-height: 1.7;
   }
 }
+// Fix gap between banner and welcome section
+.page__content {
+  padding-top: 0 !important;
+}
+.archive {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
 // Formatting for Toolbar
 .masthead {
   position: sticky;
@@ -48,4 +56,15 @@ $code-background-color: #2a2a2a;
 .greedy-nav {
   background-color: #1e1e1e !important;
   width: 100%;
+}
+// Formatting for Hamburger Menu
+@media (max-width: 900px) {
+  .greedy-nav .visible-links {
+    display: none !important;
+  }
+  .greedy-nav__toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
 }
