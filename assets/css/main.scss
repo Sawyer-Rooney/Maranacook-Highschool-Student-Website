@@ -22,12 +22,12 @@ $code-background-color: #2a2a2a;
 .welcome-section {
   max-width: 800px;
   margin: 3em auto;
-  text-align: center;
+  text-align: left;
   padding: 0 1.5em;
 
   h2 {
     color: #f5c518;
-    font-size: 4em;
+    font-size: 2.4em;
     margin-bottom: 0.5em;
   }
 
@@ -35,6 +35,5 @@ $code-background-color: #2a2a2a;
     color: #f0f0f0;
     font-size: 1.1em;
     line-height: 1.7;
-    text-align: left;
   }
 }
