@@ -1,9 +1,7 @@
 ---
 # Only the main.scss has front matter
 ---
-
 @charset "utf-8";
-
 // Override Minimal Mistakes dark skin colors
 $background-color: #1e1e1e;
 $text-color: #f0f0f0;
@@ -15,30 +13,33 @@ $navicon-link-color-hover: #ffd740;
 $footer-background-color: #141414;
 $border-color: #3a3a3a;
 $code-background-color: #2a2a2a;
-
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes";
-
 // Formatting for Welcome Page
 .welcome-section {
   max-width: 800px;
   margin: 1.5em auto !important;
   text-align: left;
   padding: 0 1.5em;
-
   h2 {
     color: #f5c518;
     font-size: 2.4em;
     margin-bottom: 0.5em;
   }
-
   p {
     color: #f0f0f0;
     font-size: 1.1em;
     line-height: 1.7;
   }
 }
-
+// Fix gap between banner and welcome section
+.page__content {
+  padding-top: 0 !important;
+}
+.archive {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
 // Formatting for Toolbar
 .masthead {
   position: sticky;
@@ -49,23 +50,21 @@ $code-background-color: #2a2a2a;
   left: 0;
   right: 0;
 }
-
 .masthead__inner-wrap {
   background-color: #1e1e1e !important;
 }
-
 .greedy-nav {
   background-color: #1e1e1e !important;
   width: 100%;
 }
-
 // Formatting for Hamburger Menu
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .greedy-nav .visible-links {
     display: none !important;
   }
-
   .greedy-nav__toggle {
-    display: block !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
   }
 }
