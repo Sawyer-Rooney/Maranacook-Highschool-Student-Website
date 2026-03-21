@@ -7,7 +7,7 @@
 // Override Minimal Mistakes dark skin colors
 $background-color: #1e1e1e;
 $text-color: #f0f0f0;
-$primary-color: #f5c518;       // Gold — links, buttons, accents
+$primary-color: #f5c518;       
 $link-color: #f5c518;
 $masthead-link-color: #f5c518;
 $masthead-link-color-hover: #ffd740;
@@ -18,3 +18,22 @@ $code-background-color: #2a2a2a;
 
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes";
+
+.welcome-section {
+  max-width: 800px;
+  margin: 3em auto;
+  text-align: center;
+  padding: 0 1.5em;
+
+  h2 {
+    color: #f5c518;
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+  }
+
+  p {
+    color: #f0f0f0;
+    font-size: 1.1em;
+    line-height: 1.7;
+  }
+}
