@@ -2,7 +2,8 @@
 # Only the main.scss has front matter
 ---
 @charset "utf-8";
-// Override Minimal Mistakes dark skin colors
+
+// ===== Theme color overrides =====
 $background-color: #1e1e1e;
 $text-color: #f0f0f0;
 $primary-color: #f5c518;       
@@ -13,26 +14,42 @@ $navicon-link-color-hover: #ffd740;
 $footer-background-color: #141414;
 $border-color: #3a3a3a;
 $code-background-color: #2a2a2a;
+
+// ===== Import theme =====
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes";
-// Formatting for Welcome Page
+
+
+// ===== Welcome Section (FULL WIDTH FIX) =====
 .welcome-section {
-  max-width: 100%;
-  margin: 1.5em 0 !important;
+  width: 100vw;                  // span full screen width
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;            // break out of centered container
+  margin-right: -50vw;
+
+  padding: 2em 3em;              // normal readable padding
+  background-color: #1e1e1e;     // match site background
+
   text-align: left;
-  padding: 0;
+
   h2 {
     color: #f5c518;
     font-size: 2.4em;
     margin-bottom: 0.5em;
   }
+
   p {
     color: #f0f0f0;
     font-size: 1.1em;
     line-height: 1.7;
+    max-width: 1200px;           // keeps text readable
   }
 }
-// Formatting for Toolbar
+
+
+// ===== Masthead / Navbar =====
 .masthead {
   position: sticky;
   top: 0;
@@ -42,30 +59,12 @@ $code-background-color: #2a2a2a;
   left: 0;
   right: 0;
 }
+
 .masthead__inner-wrap {
   background-color: #1e1e1e !important;
 }
+
 .greedy-nav {
   background-color: #1e1e1e !important;
   width: 100%;
-}
-
-.page {
-  max-width: 1400px;
-}
-
-.page__inner-wrap {
-  max-width: 1400px;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.initial-content {
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.page__content {
-  max-width: 100%;
 }
