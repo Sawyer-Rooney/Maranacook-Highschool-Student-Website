@@ -26,25 +26,20 @@ $code-background-color: #2a2a2a;
   margin-right: -50vw;
   padding: 2em 4em;
   background-color: #1e1e1e;
-
-  .page__content, .initial-content {
-    padding-top: 50em !important;    // remove extra top padding
-    padding-bottom: 0 !important; // optional: remove extra bottom padding
-  }
-
   h2 {
     color: #f5c518;
     font-size: 2.4em;
+    margin-top: 0.5em;
+    margin-bottom: 0.3em;
   }
-
   p {
     color: #f0f0f0;
     font-size: 1.1em;
     line-height: 1.7;
     max-width: 1100px;
+    margin-top: 0;
   }
 }
-
 .masthead {
   position: sticky;
   top: 0;
@@ -54,11 +49,9 @@ $code-background-color: #2a2a2a;
   left: 0;
   right: 0;
 }
-
 .masthead__inner-wrap {
   background-color: #1e1e1e !important;
 }
-
 .greedy-nav {
   background-color: #1e1e1e !important;
   width: 100%;
