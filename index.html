@@ -172,15 +172,20 @@ excerpt: "Student Government · Honor Societies · Clubs · Events"
   }
 
   function renderPdfPage(pageNum) {
-    currentPdf.getPage(pageNum).then(function(page) {
-      var canvas = document.getElementById('lightbox-canvas');
-      var viewport = page.getViewport({ scale: 1.5 });
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport });
+  currentPdf.getPage(pageNum).then(function(page) {
+    var visibleCanvas = document.getElementById('lightbox-canvas');
+    var offscreen = document.createElement('canvas');
+    var viewport = page.getViewport({ scale: 1.5 });
+    offscreen.width = viewport.width;
+    offscreen.height = viewport.height;
+    page.render({ canvasContext: offscreen.getContext('2d'), viewport: viewport }).promise.then(function() {
+      visibleCanvas.width = offscreen.width;
+      visibleCanvas.height = offscreen.height;
+      visibleCanvas.getContext('2d').drawImage(offscreen, 0, 0);
       document.getElementById('gallery-counter').textContent = 'Page ' + pageNum + ' / ' + currentPdfTotalPages;
     });
-  }
+  });
+}
 
   function handlePrev() {
     if (currentMode === 'pdf') {
