@@ -243,7 +243,13 @@
     if (document.getElementById('lightbox').style.display === 'flex') {
       e.preventDefault();
       var slider = document.getElementById('zoom-slider');
-      var newVal = parseFloat(slider.value) - e.deltaY * 0.001;
+      var delta = e.deltaY;
+      if (e.deltaMode === 0) {
+        delta = delta * 0.005;
+      } else {
+        delta = delta * 0.1;
+      }
+      var newVal = parseFloat(slider.value) - delta;
       newVal = Math.min(3, Math.max(1, newVal));
       slider.value = newVal;
       document.getElementById('zoom-label').textContent = newVal.toFixed(1) + 'x';
