@@ -17,6 +17,11 @@ $code-background-color: #2a2a2a;
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes";
 
+.page__content {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
 .masthead {
   position: sticky;
   top: 0;
