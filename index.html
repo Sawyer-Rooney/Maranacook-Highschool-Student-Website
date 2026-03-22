@@ -165,10 +165,14 @@ excerpt: "Student Government · Honor Societies · Clubs · Events"
   }
 
   function applyTransform(target) {
-    var zoom = document.getElementById('zoom-slider').value;
-    var x = document.getElementById('x-slider').value;
-    var y = document.getElementById('y-slider').value;
-    target.style.transform = 'scale(' + zoom + ') translate(' + x + 'px, ' + y + 'px)';
+    var zoom = parseFloat(document.getElementById('zoom-slider').value);
+    var x = parseFloat(document.getElementById('x-slider').value);
+    var y = parseFloat(document.getElementById('y-slider').value);
+    var w = target.offsetWidth;
+    var h = target.offsetHeight;
+    var scaledX = (x / 100) * (w / 2) * ((zoom - 1) / zoom);
+    var scaledY = (y / 100) * (h / 2) * ((zoom - 1) / zoom);
+    target.style.transform = 'scale(' + zoom + ') translate(' + scaledX + 'px, ' + scaledY + 'px)';
   }
 
   function panImage() {
