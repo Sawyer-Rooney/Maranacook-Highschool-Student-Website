@@ -168,13 +168,13 @@ excerpt: "Student Government · Honor Societies · Clubs · Events"
     var zoom = parseFloat(document.getElementById('zoom-slider').value);
     var x = parseFloat(document.getElementById('x-slider').value);
     var y = parseFloat(document.getElementById('y-slider').value);
-    var w = target.naturalWidth || target.width;
-    var h = target.naturalHeight || target.height;
+    var w = target.offsetWidth;
+    var h = target.offsetHeight;
     var scaledX = -(x / 100) * (w / 2);
     var scaledY = (y / 100) * (h / 2);
     target.style.transform = 'scale(' + zoom + ') translate(' + scaledX + 'px, ' + scaledY + 'px)';
   }
-
+  
   function panImage() {
     var target = currentMode === 'pdf' ?
       document.getElementById('lightbox-canvas') :
