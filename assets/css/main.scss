@@ -36,20 +36,6 @@ $code-background-color: #2a2a2a;
   width: 100%;
 }
 
-.greedy-nav .hidden-links .masthead__menu-item a {
-  &:hover {
-    color: #ffd740 !important;
-    background-color: transparent !important;
-    outline: none !important;
-  }
-}
-
-.greedy-nav .hidden-links .masthead__menu-item {
-  &:hover {
-    background-color: transparent !important;
-  }
-}
-
 ul.hidden-links li a {
   color: #f0f0f0 !important;
   &:hover {
@@ -57,11 +43,9 @@ ul.hidden-links li a {
     color: #1e1e1e !important;
   }
 }
-
 ul.hidden-links li:hover {
   background-color: #f5c518 !important;
 }
-
 .greedy-nav__toggle {
   outline: none !important;
   &:focus {
