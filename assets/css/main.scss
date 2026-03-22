@@ -85,6 +85,7 @@ input[type="range"] {
   outline: none !important;
   &:focus {
     outline: none !important;
+    box-shadow: none !important;
   }
 }
 
