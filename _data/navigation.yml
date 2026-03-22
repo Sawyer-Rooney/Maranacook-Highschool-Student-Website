@@ -1,11 +1,19 @@
 main:
   - title: "Home"
     url: /
+  - title: "Student Shoutouts"
+    url: /student-shoutouts/
   - title: "Student Government"
     url: /student-government/
   - title: "Honor Societies"
     url: /honor-societies/
-  - title: "Clubs"
-    url: /clubs/
   - title: "Events"
     url: /events/
+  - title: "Theater"
+    url: /theater/
+  - title: "Teen Issues Day"
+    url: /teen-issues-day/
+  - title: "Other Clubs"
+    url: /other-clubs/
+  - title: "About this Website"
+    url: /about-this-website/
