@@ -89,6 +89,21 @@ excerpt: "Student Government · Honor Societies · Clubs · Events"
   </div>
 </div>
 
+<div class="pdf-section">
+  <h2>Documents</h2>
+  <p>Click any document to view it.</p>
+  <div class="pdf-grid">
+    <div class="pdf-item" onclick="openPdf('/Maranacook-Highschool-Student-Website/assets/pdfs/document1.pdf')">
+      <canvas class="pdf-thumbnail" data-pdf="/Maranacook-Highschool-Student-Website/assets/pdfs/document1.pdf"></canvas>
+      <span class="pdf-caption">Document 1</span>
+    </div>
+    <div class="pdf-item" onclick="openPdf('/Maranacook-Highschool-Student-Website/assets/pdfs/document2.pdf')">
+      <canvas class="pdf-thumbnail" data-pdf="/Maranacook-Highschool-Student-Website/assets/pdfs/document2.pdf"></canvas>
+      <span class="pdf-caption">Document 2</span>
+    </div>
+  </div>
+</div>
+
 <div id="lightbox" onclick="handleLightboxClick(event)" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center; flex-direction:column;">
   <div style="position:fixed; top:90px; left:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:0 30px; box-sizing:border-box; z-index:10000;">
     <div style="display:flex; align-items:center; gap:1em;">
@@ -99,36 +114,102 @@ excerpt: "Student Government · Honor Societies · Clubs · Events"
     <button onclick="closeLightbox()" style="font-size:2em; color:#f0f0f0; background:none; border:none; cursor:pointer; outline:none;">&times;</button>
   </div>
   <div style="position:fixed; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:space-between; pointer-events:none; z-index:10000;">
-    <div id="prev-btn" onclick="changeImage(-1)" style="pointer-events:all; background:rgba(0,0,0,0.5); cursor:pointer; display:none; width:60px; height:60px; border-radius:50%; margin-left:15px; user-select:none; align-items:center; justify-content:center;">
+    <div id="prev-btn" onclick="handlePrev()" style="pointer-events:all; background:rgba(0,0,0,0.5); cursor:pointer; display:none; width:60px; height:60px; border-radius:50%; margin-left:15px; user-select:none; align-items:center; justify-content:center;">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f0f0f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
     </div>
-    <div id="next-btn" onclick="changeImage(1)" style="pointer-events:all; background:rgba(0,0,0,0.5); cursor:pointer; display:none; width:60px; height:60px; border-radius:50%; margin-right:15px; user-select:none; align-items:center; justify-content:center;">
+    <div id="next-btn" onclick="handleNext()" style="pointer-events:all; background:rgba(0,0,0,0.5); cursor:pointer; display:none; width:60px; height:60px; border-radius:50%; margin-right:15px; user-select:none; align-items:center; justify-content:center;">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f0f0f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </div>
   </div>
-  <img id="lightbox-img" src="" style="max-width:80%; max-height:75%; border-radius:6px; transition: transform 0.2s; margin-top:80px;">
+  <canvas id="lightbox-canvas" style="display:none; max-width:80%; max-height:75%; border-radius:6px; margin-top:80px;"></canvas>
+  <img id="lightbox-img" src="" style="display:none; max-width:80%; max-height:75%; border-radius:6px; transition: transform 0.2s; margin-top:80px;">
   <span id="gallery-counter" style="color:#f0f0f0; margin-top:0.5em; font-size:0.9em; display:none;"></span>
 </div>
 
-<script>
-  function loadVideo(el, videoId) {
-    var iframe = document.createElement('iframe');
-    iframe.width = '560';
-    iframe.height = '315';
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1';
-    iframe.frameBorder = '0';
-    iframe.allowFullscreen = true;
-    el.parentNode.replaceChild(iframe, el);
-  }
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
   var currentImages = [];
   var currentIndex = 0;
+  var currentMode = 'image';
+  var currentPdf = null;
+  var currentPdfPage = 1;
+  var currentPdfTotalPages = 0;
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var thumbnails = document.querySelectorAll('.pdf-thumbnail');
+    thumbnails.forEach(function(canvas) {
+      var pdfUrl = canvas.getAttribute('data-pdf');
+      pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+        pdf.getPage(1).then(function(page) {
+          var viewport = page.getViewport({ scale: 0.5 });
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport });
+        });
+      });
+    });
+  });
+
+  function openPdf(pdfUrl) {
+    currentMode = 'pdf';
+    currentPdfPage = 1;
+    document.getElementById('lightbox-img').style.display = 'none';
+    document.getElementById('lightbox-canvas').style.display = 'block';
+    document.getElementById('zoom-slider').value = 1;
+    document.getElementById('zoom-label').textContent = '1x';
+    document.getElementById('lightbox').style.display = 'flex';
+    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+      currentPdf = pdf;
+      currentPdfTotalPages = pdf.numPages;
+      renderPdfPage(currentPdfPage);
+      document.getElementById('prev-btn').style.display = 'flex';
+      document.getElementById('next-btn').style.display = 'flex';
+      document.getElementById('gallery-counter').style.display = 'block';
+    });
+  }
+
+  function renderPdfPage(pageNum) {
+    currentPdf.getPage(pageNum).then(function(page) {
+      var canvas = document.getElementById('lightbox-canvas');
+      var viewport = page.getViewport({ scale: 1.5 });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport });
+      document.getElementById('gallery-counter').textContent = 'Page ' + pageNum + ' / ' + currentPdfTotalPages;
+    });
+  }
+
+  function handlePrev() {
+    if (currentMode === 'pdf') {
+      if (currentPdfPage > 1) {
+        currentPdfPage--;
+        renderPdfPage(currentPdfPage);
+      }
+    } else {
+      changeImage(-1);
+    }
+  }
+
+  function handleNext() {
+    if (currentMode === 'pdf') {
+      if (currentPdfPage < currentPdfTotalPages) {
+        currentPdfPage++;
+        renderPdfPage(currentPdfPage);
+      }
+    } else {
+      changeImage(1);
+    }
+  }
 
   function openLightbox(img) {
+    currentMode = 'image';
     currentImages = [];
     currentIndex = 0;
+    document.getElementById('lightbox-canvas').style.display = 'none';
+    document.getElementById('lightbox-img').style.display = 'block';
     document.getElementById('lightbox-img').src = img.src;
     document.getElementById('zoom-slider').value = 1;
     document.getElementById('lightbox-img').style.transform = 'scale(1)';
@@ -140,6 +221,9 @@ excerpt: "Student Government · Honor Societies · Clubs · Events"
   }
 
   function openGallery(index, img) {
+    currentMode = 'image';
+    document.getElementById('lightbox-canvas').style.display = 'none';
+    document.getElementById('lightbox-img').style.display = 'block';
     var allImgs = img.closest('.gallery-grid').querySelectorAll('img');
     currentImages = Array.from(allImgs).map(function(i) { return i.src; });
     currentIndex = index;
@@ -169,6 +253,8 @@ excerpt: "Student Government · Honor Societies · Clubs · Events"
     document.getElementById('lightbox').style.display = 'none';
     document.getElementById('prev-btn').style.display = 'none';
     document.getElementById('next-btn').style.display = 'none';
+    currentPdf = null;
+    currentMode = 'image';
   }
 
   function handleLightboxClick(event) {
@@ -178,14 +264,28 @@ excerpt: "Student Government · Honor Societies · Clubs · Events"
   }
 
   function zoomImage(value) {
-    document.getElementById('lightbox-img').style.transform = 'scale(' + value + ')';
+    if (currentMode === 'image') {
+      document.getElementById('lightbox-img').style.transform = 'scale(' + value + ')';
+    } else {
+      document.getElementById('lightbox-canvas').style.transform = 'scale(' + value + ')';
+    }
     document.getElementById('zoom-label').textContent = parseFloat(value).toFixed(1) + 'x';
+  }
+
+  function loadVideo(el, videoId) {
+    var iframe = document.createElement('iframe');
+    iframe.width = '560';
+    iframe.height = '315';
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1';
+    iframe.frameBorder = '0';
+    iframe.allowFullscreen = true;
+    el.parentNode.replaceChild(iframe, el);
   }
 
   document.addEventListener('keydown', function(e) {
     if (document.getElementById('lightbox').style.display === 'flex') {
-      if (e.key === 'ArrowLeft') changeImage(-1);
-      if (e.key === 'ArrowRight') changeImage(1);
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'ArrowRight') handleNext();
       if (e.key === 'Escape') closeLightbox();
     }
   });
