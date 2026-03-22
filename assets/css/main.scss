@@ -81,6 +81,13 @@ ul.hidden-links li:hover {
   }
 }
 
+input[type="range"] {
+  outline: none !important;
+  &:focus {
+    outline: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .image-section {
     flex-direction: column;
