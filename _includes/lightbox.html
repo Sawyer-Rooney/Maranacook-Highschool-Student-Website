@@ -1,0 +1,253 @@
+<div id="lightbox" onclick="handleLightboxClick(event)" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center; flex-direction:column;">
+  <div style="position:fixed; top:90px; left:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:0 30px; box-sizing:border-box; z-index:10000;">
+    <div style="display:flex; align-items:center; gap:0.8em; flex-wrap:wrap;">
+      <div style="display:flex; align-items:center; gap:0.4em; white-space:nowrap;">
+        <span style="color:#f0f0f0; font-size:0.9em;">Zoom</span>
+        <input type="range" id="zoom-slider" min="1" max="3" step="0.1" value="1" style="width:120px; accent-color:#f5c518;" oninput="zoomImage(this.value)">
+        <span id="zoom-label" style="color:#f0f0f0; font-size:0.9em;">1x</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:0.4em; white-space:nowrap;">
+        <span style="color:#f0f0f0; font-size:0.9em;">X</span>
+        <input type="range" id="x-slider" min="-100" max="100" step="1" value="0" style="width:120px; accent-color:#f5c518;" oninput="panImage()">
+      </div>
+      <div style="display:flex; align-items:center; gap:0.4em; white-space:nowrap;">
+        <span style="color:#f0f0f0; font-size:0.9em;">Y</span>
+        <input type="range" id="y-slider" min="-100" max="100" step="1" value="0" style="width:120px; accent-color:#f5c518;" oninput="panImage()">
+      </div>
+    </div>
+    <button onclick="closeLightbox()" style="font-size:2em; color:#f0f0f0; background:none; border:none; cursor:pointer; outline:none;">&times;</button>
+  </div>
+  <div style="position:fixed; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:space-between; pointer-events:none; z-index:10000;">
+    <div id="prev-btn" onclick="handlePrev()" style="pointer-events:all; background:rgba(0,0,0,0.5); cursor:pointer; display:none; width:60px; height:60px; border-radius:50%; margin-left:15px; user-select:none; align-items:center; justify-content:center;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f0f0f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </div>
+    <div id="next-btn" onclick="handleNext()" style="pointer-events:all; background:rgba(0,0,0,0.5); cursor:pointer; display:none; width:60px; height:60px; border-radius:50%; margin-right:15px; user-select:none; align-items:center; justify-content:center;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f0f0f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </div>
+  </div>
+  <canvas id="lightbox-canvas" style="display:none; max-width:80%; max-height:75%; border-radius:6px; margin-top:80px;"></canvas>
+  <img id="lightbox-img" src="" style="display:none; max-width:80%; max-height:75%; border-radius:6px; transition: transform 0.2s; margin-top:80px;">
+  <span id="gallery-counter" style="display:none; color:#f0f0f0; background:rgba(0,0,0,0.5); border-radius:8px; padding:0.3em 0.8em; font-size:0.9em; position:fixed; bottom:30px; left:50%; transform:translateX(-50%); z-index:10001;"></span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  var currentImages = [];
+  var currentIndex = 0;
+  var currentMode = 'image';
+  var currentPdf = null;
+  var currentPdfPage = 1;
+  var currentPdfTotalPages = 0;
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var thumbnails = document.querySelectorAll('.pdf-thumbnail');
+    thumbnails.forEach(function(canvas) {
+      var pdfUrl = canvas.getAttribute('data-pdf');
+      pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+        pdf.getPage(1).then(function(page) {
+          var viewport = page.getViewport({ scale: 0.5 });
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport });
+        });
+      });
+    });
+  });
+
+  function resetSliders() {
+    document.getElementById('zoom-slider').value = 1;
+    document.getElementById('zoom-label').textContent = '1x';
+    document.getElementById('x-slider').value = 0;
+    document.getElementById('y-slider').value = 0;
+  }
+  
+  function applyTransform(target) {
+    var zoom = parseFloat(document.getElementById('zoom-slider').value);
+    var x = parseFloat(document.getElementById('x-slider').value);
+    var y = parseFloat(document.getElementById('y-slider').value);
+    var w = target.offsetWidth;
+    var h = target.offsetHeight;
+    var scaledX = -(x / 100) * (w / 2);
+    var scaledY = (y / 100) * (h / 2);
+    target.style.transform = 'scale(' + zoom + ') translate(' + scaledX + 'px, ' + scaledY + 'px)';
+  }
+  
+  function panImage() {
+    var target = currentMode === 'pdf' ?
+      document.getElementById('lightbox-canvas') :
+      document.getElementById('lightbox-img');
+    applyTransform(target);
+  }
+
+  function zoomImage(value) {
+    document.getElementById('zoom-label').textContent = parseFloat(value).toFixed(1) + 'x';
+    panImage();
+  }
+
+  function openPdf(pdfUrl) {
+    currentMode = 'pdf';
+    currentPdfPage = 1;
+    document.getElementById('lightbox-img').style.display = 'none';
+    document.getElementById('lightbox-canvas').style.display = 'block';
+    document.getElementById('lightbox-canvas').style.transform = 'scale(1) translate(0px, 0px)';
+    resetSliders();
+    document.getElementById('lightbox').style.display = 'flex';
+    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+      currentPdf = pdf;
+      currentPdfTotalPages = pdf.numPages;
+      renderPdfPage(currentPdfPage);
+      document.getElementById('prev-btn').style.display = 'flex';
+      document.getElementById('next-btn').style.display = 'flex';
+      document.getElementById('gallery-counter').style.display = 'block';
+    });
+  }
+
+  function renderPdfPage(pageNum) {
+    currentPdf.getPage(pageNum).then(function(page) {
+      var visibleCanvas = document.getElementById('lightbox-canvas');
+      var offscreen = document.createElement('canvas');
+      var viewport = page.getViewport({ scale: 1.5 });
+      offscreen.width = viewport.width;
+      offscreen.height = viewport.height;
+      page.render({ canvasContext: offscreen.getContext('2d'), viewport: viewport }).promise.then(function() {
+        visibleCanvas.width = offscreen.width;
+        visibleCanvas.height = offscreen.height;
+        visibleCanvas.getContext('2d').drawImage(offscreen, 0, 0);
+        resetSliders();
+        visibleCanvas.style.transform = 'scale(1) translate(0px, 0px)';
+        document.getElementById('gallery-counter').textContent = 'Page ' + pageNum + ' / ' + currentPdfTotalPages;
+      });
+    });
+  }
+
+  function handlePrev() {
+    if (currentMode === 'pdf') {
+      if (currentPdfPage > 1) {
+        currentPdfPage--;
+        renderPdfPage(currentPdfPage);
+      }
+    } else {
+      changeImage(-1);
+    }
+  }
+
+  function handleNext() {
+    if (currentMode === 'pdf') {
+      if (currentPdfPage < currentPdfTotalPages) {
+        currentPdfPage++;
+        renderPdfPage(currentPdfPage);
+      }
+    } else {
+      changeImage(1);
+    }
+  }
+
+  function openLightbox(img) {
+    currentMode = 'image';
+    currentImages = [];
+    currentIndex = 0;
+    document.getElementById('lightbox-canvas').style.display = 'none';
+    document.getElementById('lightbox-img').style.display = 'block';
+    document.getElementById('lightbox-img').src = img.src;
+    resetSliders();
+    document.getElementById('lightbox-img').style.transform = 'scale(1) translate(0px, 0px)';
+    document.getElementById('prev-btn').style.display = 'none';
+    document.getElementById('next-btn').style.display = 'none';
+    document.getElementById('gallery-counter').style.display = 'none';
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+
+  function openGallery(index, img) {
+    currentMode = 'image';
+    document.getElementById('lightbox-canvas').style.display = 'none';
+    document.getElementById('lightbox-img').style.display = 'block';
+    var allImgs = img.closest('.gallery-grid').querySelectorAll('img');
+    currentImages = Array.from(allImgs).map(function(i) { return i.src; });
+    currentIndex = index;
+    showGalleryImage();
+    document.getElementById('prev-btn').style.display = 'flex';
+    document.getElementById('next-btn').style.display = 'flex';
+    document.getElementById('gallery-counter').style.display = 'block';
+    resetSliders();
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+
+  function showGalleryImage() {
+    resetSliders();
+    document.getElementById('lightbox-img').style.transform = 'scale(1) translate(0px, 0px)';
+    document.getElementById('lightbox-img').src = currentImages[currentIndex];
+    document.getElementById('gallery-counter').textContent = (currentIndex + 1) + ' / ' + currentImages.length;
+  }
+
+  function changeImage(direction) {
+    currentIndex = (currentIndex + direction + currentImages.length) % currentImages.length;
+    showGalleryImage();
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.getElementById('prev-btn').style.display = 'none';
+    document.getElementById('next-btn').style.display = 'none';
+    currentPdf = null;
+    currentMode = 'image';
+  }
+
+  function handleLightboxClick(event) {
+    if (event.target === document.getElementById('lightbox')) {
+      closeLightbox();
+    }
+  }
+
+  function loadVideo(el, videoId) {
+    var iframe = document.createElement('iframe');
+    iframe.width = '560';
+    iframe.height = '315';
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1';
+    iframe.frameBorder = '0';
+    iframe.allowFullscreen = true;
+    el.parentNode.replaceChild(iframe, el);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (document.getElementById('lightbox').style.display === 'flex') {
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'a' || e.key === 'A') {
+        var x = document.getElementById('x-slider');
+        x.value = Math.max(-100, parseFloat(x.value) - 5);
+        panImage();
+      }
+      if (e.key === 'd' || e.key === 'D') {
+        var x = document.getElementById('x-slider');
+        x.value = Math.min(100, parseFloat(x.value) + 5);
+        panImage();
+      }
+      if (e.key === 's' || e.key === 'S') {
+        var y = document.getElementById('y-slider');
+        y.value = Math.max(-100, parseFloat(y.value) - 5);
+        panImage();
+      }
+      if (e.key === 'w' || e.key === 'W') {
+        var y = document.getElementById('y-slider');
+        y.value = Math.min(100, parseFloat(y.value) + 5);
+        panImage();
+      }
+      if (e.key === 'Escape') closeLightbox();
+    }
+  });
+  
+  document.addEventListener('wheel', function(e) {
+    if (document.getElementById('lightbox').style.display === 'flex') {
+      e.preventDefault();
+      var slider = document.getElementById('zoom-slider');
+      var newVal = parseFloat(slider.value) - e.deltaY * 0.001;
+      newVal = Math.min(3, Math.max(1, newVal));
+      slider.value = newVal;
+      document.getElementById('zoom-label').textContent = newVal.toFixed(1) + 'x';
+      panImage();
+    }
+  }, { passive: false });
+</script>
