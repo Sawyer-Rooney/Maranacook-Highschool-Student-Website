@@ -52,7 +52,7 @@ excerpt: "Student Government · Honor Societies · Clubs · Events"
   </div>
 </div>
 
-<div id="lightbox" onclick="handleLightboxClick(event)" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center; flex-direction:column;">
+<div id="lightbox" onclick="handleLightboxClick(event)" style="display:none; position:fixed; top:0; left:0; width:100%; min-height:100vh; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center; flex-direction:column;">
   <div style="position:fixed; top:90px; left:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:0 30px; box-sizing:border-box; z-index:10000;">
     <div style="display:flex; align-items:center; gap:1em;">
       <span style="color:#f0f0f0; font-size:0.9em;">Zoom</span>
@@ -78,6 +78,7 @@ excerpt: "Student Government · Honor Societies · Clubs · Events"
   var currentIndex = 0;
 
   function openLightbox(img) {
+    document.body.style.overflow = 'hidden';
     currentImages = [];
     currentIndex = 0;
     document.getElementById('lightbox-img').src = img.src;
@@ -91,6 +92,7 @@ excerpt: "Student Government · Honor Societies · Clubs · Events"
   }
 
   function openGallery(index, img) {
+    document.body.style.overflow = 'hidden';
     var allImgs = img.closest('.gallery-grid').querySelectorAll('img');
     currentImages = Array.from(allImgs).map(function(i) { return i.src; });
     currentIndex = index;
@@ -117,6 +119,7 @@ excerpt: "Student Government · Honor Societies · Clubs · Events"
   }
 
   function closeLightbox() {
+    document.body.style.overflow = '';
     document.getElementById('lightbox').style.display = 'none';
     document.getElementById('prev-btn').style.display = 'none';
     document.getElementById('next-btn').style.display = 'none';
