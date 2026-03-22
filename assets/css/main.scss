@@ -17,6 +17,30 @@ $code-background-color: #2a2a2a;
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes";
 
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #1e1e1e !important;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
+.masthead__inner-wrap {
+  background-color: #1e1e1e !important;
+}
+
+.greedy-nav {
+  background-color: #1e1e1e !important;
+  width: 100%;
+}
+
+.page__footer {
+  z-index: 1 !important;
+  position: relative;
+}
+
 .welcome-section {
   width: 100vw;
   position: relative;
@@ -39,25 +63,6 @@ $code-background-color: #2a2a2a;
     max-width: 1100px;
     margin-top: 0;
   }
-}
-
-.masthead {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: #1e1e1e !important;
-  width: 100%;
-  left: 0;
-  right: 0;
-}
-
-.masthead__inner-wrap {
-  background-color: #1e1e1e !important;
-}
-
-.greedy-nav {
-  background-color: #1e1e1e !important;
-  width: 100%;
 }
 
 .info-section {
