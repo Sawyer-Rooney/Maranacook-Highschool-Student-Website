@@ -50,6 +50,15 @@ $code-background-color: #2a2a2a;
   }
 }
 
+ul.hidden-links li a:hover {
+  background-color: transparent !important;
+  color: #ffd740 !important;
+}
+
+ul.hidden-links li:hover {
+  background-color: transparent !important;
+}
+
 @media (max-width: 768px) {
   .image-section {
     flex-direction: column;
