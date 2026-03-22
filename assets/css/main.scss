@@ -86,7 +86,13 @@ ul.hidden-links li:hover {
     flex-direction: column;
     .video-section__video {
       width: 100%;
+      min-width: unset !important;
       iframe {
+        width: 100% !important;
+        min-width: unset !important;
+      }
+      div {
+        min-width: unset !important;
         width: 100% !important;
       }
     }
