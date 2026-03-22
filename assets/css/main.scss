@@ -17,11 +17,6 @@ $code-background-color: #2a2a2a;
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes";
 
-.page__content {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-}
-
 .masthead {
   position: sticky;
   top: 0;
@@ -102,7 +97,7 @@ ul.hidden-links li:hover {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  height: 8px;
+  height: 16px;
   background-color: #f5c518;
 }
 
