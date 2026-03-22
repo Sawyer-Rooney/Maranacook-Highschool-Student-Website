@@ -51,12 +51,20 @@ $code-background-color: #2a2a2a;
 }
 
 ul.hidden-links li a:hover {
-  background-color: transparent !important;
-  color: #ffd740 !important;
+  background-color: #f5c518 !important;
+  color: #1e1e1e !important;
 }
 
 ul.hidden-links li:hover {
-  background-color: transparent !important;
+  background-color: #f5c518 !important;
+}
+
+.greedy-nav__toggle {
+  outline: none !important;
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
 }
 
 @media (max-width: 768px) {
