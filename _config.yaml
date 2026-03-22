@@ -7,3 +7,6 @@ minimal_mistakes_skin: dark
 plugins:
   - jekyll-include-cache
 masthead_title: "Maranacook Student Website"
+collections:
+  galleries:
+    output: false
