@@ -36,18 +36,17 @@ $code-background-color: #2a2a2a;
   width: 100%;
 }
 
-.greedy-nav .hidden-links {
-  a {
-    &:hover {
-      color: #ffd740 !important;
-      background: transparent !important;
-    }
+.greedy-nav .hidden-links .masthead__menu-item a {
+  &:hover {
+    color: #ffd740 !important;
+    background-color: transparent !important;
+    outline: none !important;
   }
-  
-  li {
-    &:hover {
-      background: transparent !important;
-    }
+}
+
+.greedy-nav .hidden-links .masthead__menu-item {
+  &:hover {
+    background-color: transparent !important;
   }
 }
 
