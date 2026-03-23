@@ -84,15 +84,19 @@ ul.hidden-links li:hover {
 input[type="range"] {
   outline: none !important;
   box-shadow: none !important;
+  border: none !important;
   &:focus {
     outline: none !important;
     box-shadow: none !important;
+    border: none !important;
   }
   &::-webkit-slider-thumb {
     box-shadow: none !important;
+    border: none !important;
   }
   &::-moz-range-thumb {
     box-shadow: none !important;
+    border: none !important;
   }
 }
 
