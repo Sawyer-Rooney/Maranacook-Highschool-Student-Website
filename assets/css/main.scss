@@ -123,6 +123,11 @@ ul.hidden-links li:hover {
   }
 }
 
+input[type="range"]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .decoration-bar {
   width: 100vw;
   position: relative;
