@@ -123,6 +123,19 @@ ul.hidden-links li:hover {
   }
 }
 
+input[type="range"] {
+  border: none !important;
+  &:focus {
+    border: none !important;
+  }
+  &::-webkit-slider-thumb {
+    border: none !important;
+  }
+  &::-moz-range-thumb {
+    border: none !important;
+  }
+}
+
 .decoration-bar {
   width: 100vw;
   position: relative;
