@@ -81,45 +81,6 @@ ul.hidden-links li:hover {
   }
 }
 
-input[type="range"] {
-  outline: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  -webkit-appearance: none !important;
-  height: 4px;
-  background: #3a3a3a;
-  border-radius: 2px;
-  &:focus {
-    outline: none !important;
-    box-shadow: none !important;
-    border: none !important;
-  }
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none !important;
-    box-shadow: none !important;
-    border: none !important;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #f5c518;
-    cursor: pointer;
-  }
-  &::-moz-range-thumb {
-    box-shadow: none !important;
-    border: none !important;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #f5c518;
-    cursor: pointer;
-  }
-  &::-webkit-slider-runnable-track {
-    height: 4px;
-    background: #3a3a3a;
-    border-radius: 2px;
-  }
-}
-
 @media (max-width: 768px) {
   .image-section {
     flex-direction: column;
