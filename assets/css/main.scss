@@ -124,15 +124,15 @@ ul.hidden-links li:hover {
 }
 
 input[type="range"] {
-  border: none !important;
+  box-shadow: none !important;
   &:focus {
-    border: none !important;
+    box-shadow: none !important;
   }
   &::-webkit-slider-thumb {
-    border: none !important;
+    box-shadow: none !important;
   }
   &::-moz-range-thumb {
-    border: none !important;
+    box-shadow: none !important;
   }
 }
 
