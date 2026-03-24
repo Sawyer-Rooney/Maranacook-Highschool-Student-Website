@@ -123,6 +123,12 @@ ul.hidden-links li:hover {
   }
 }
 
+#lightbox input[type="range"]:focus,
+#lightbox input[type="range"]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .decoration-bar {
   width: 100vw;
   position: relative;
